@@ -1,0 +1,15 @@
+{
+  "name": "requirevsimport",
+  "version": "1.0.0",
+  "description": "This folder only made for how we can import export keyword",
+  "license": "ISC",
+  "author": "Harshit",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "random-word": "^3.0.0"
+  }
+}
