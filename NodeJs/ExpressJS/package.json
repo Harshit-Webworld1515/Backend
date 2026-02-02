@@ -1,0 +1,12 @@
+{
+  "name": "expressjs",
+  "version": "1.0.0",
+  "description": "I am beginner for express js",
+  "license": "ISC",
+  "author": "Harshit",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
