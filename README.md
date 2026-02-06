@@ -20,13 +20,35 @@ This repo will **grow over time** as more backend concepts are added.
 ```
 Backend/
 ├─ NodeJs/
-│  ├─ FigletDir/        # npm package experiments (e.g. figlet)
-│  ├─ Fruit/            # module import/export practice
-│  ├─ myProject/        # individual backend mini-projects
-│  ├─ Math.js           # utility scripts
-│  └─ Script.js         # Node.js basics & experiments
+│  ├─ ExpressJS/
+│  │  ├─ index.js
+│  │  ├─ package.json
+│  │  └─ package-lock.json
+│  │
+│  └─ nodejs-Basics/
+│     ├─ Script.js          # 👈 direct child
+│     ├─ Math.js            # 👈 direct child
+│     │
+│     ├─ Fruit/
+│     │  ├─ Banana.js
+│     │  ├─ Mango.js
+│     │  ├─ Orange.js
+│     │  └─ index.js
+│     │
+│     ├─ RequireVsImport/
+│     │  ├─ export.js
+│     │  ├─ import.js
+│     │  ├─ package.json
+│     │  └─ package-lock.json
+│     │
+│     └─ FigletDir/
+│        ├─ index.js
+│        ├─ package.json
+│        └─ package-lock.json
+│
 ├─ .gitignore
 └─ README.md
+
 ```
 
 > Each folder inside `NodeJs/` may represent **a separate concept or mini-project**.
