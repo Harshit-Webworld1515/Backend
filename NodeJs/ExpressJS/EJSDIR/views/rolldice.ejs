@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiceVal</title>
+</head>
+
+<body>
+    <H1><i style="color: rgb(53, 226, 137);">This time dice value is: </i>
+        <%= diceValue%>
+    </H1>
+    <% if (diceValue===6) { %>
+        <h2 style="color: red;">You rolled a six! 🎉</h2>
+        <% } else { %>
+            <h2 style="color: blue;">Better luck next time!</h2>
+            <% } %>
+</body>
+
+</html>

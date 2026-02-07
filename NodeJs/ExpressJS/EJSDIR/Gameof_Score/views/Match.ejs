@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament</title>
+</head>
+
+<body>
+    <h2 id="runs"></h2>
+    <h3></h3>
+    <button>Hit</button>
+
+    <script>
+        const button = document.querySelector("button");
+        const runs = [];
+        const h3 = document.querySelector("h3");
+
+        h3.innerText = "Click the button to start the game!";
+
+        let clickCount = 0;  //  Track clicks
+
+        const score = () => {
+            const randomRun = Math.floor(Math.random() * 6) + 1;
+            runs.push(randomRun);
+            h3.innerText = `Current run: ${randomRun}`;
+            document.getElementById("runs").innerText = runs.join(", ");
+
+            clickCount++;
+            if (clickCount === 6) {
+                button.removeEventListener("click", score);
+                const total = runs.reduce((acc, cur) => acc + cur, 0);
+                document.getElementById("runs").innerText = `Total runs: ${total}`;
+                h3.innerText = `Game Over <%= player %>! Total: ${total}`;
+            }
+        }
+
+        button.addEventListener("click", score);
+    </script>
+</body>
+
+</html>

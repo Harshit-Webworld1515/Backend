@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
 </head>
+
 <body>
 
-  <h1>This is the home page</h1>
-
+  <h1>This is the home page 98*7=</h1>
+  <h3>
+    <%= 98*7 %>
+      <%= harshit.toUpperCase() %> students: <%= students[1] %>
+  </h3>
   <p>
     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde,
     voluptatibus, recusandae ea laudantium accusamus ab enim necessitatibus:
     odit est nisi ut debitis beatae quasi possimus tempora dicta distinctio
     modi quibusdam.
   </p>
-  <button>Click Me</button>
+  <h2>Best Athletes of our School</h2>
+  <ul>
+    <% students.forEach((athlete)=> { %>
+      <li>
+        <%= athlete %>
+      </li>
+      <% }) %>
+        <button>Click Me</button>
 </body>
 </html>
