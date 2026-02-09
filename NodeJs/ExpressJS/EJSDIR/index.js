@@ -17,6 +17,13 @@ res.render("home", {
 });
 }); 
 
+app.get("/about/:username", (req, res) => {
+    const { username } = req.params;
+    const profile=require("./data.json");
+    // console.log(profile[username]);          
+    res.render("about.ejs", {  profile, username });
+}); 
+
 app.get("/rolldice", (req, res) => {
     const guess = Math.floor(Math.random() * 6) + 1;
     res.render("rolldice", { diceValue: guess});

@@ -1,0 +1,35 @@
+<%- include("includes/header.ejs") %>
+
+    <body>
+        <% if (profile[username]===undefined) { %>
+            <h1>Sorry! This page is not found</h1>
+
+            <% } else { %>
+                <h1>Welcome to the About Page for UserId @<%=profile[username].name %>
+                </h1>
+                <div>
+                    <button>message</button>
+                    <button>follow</button>
+                </div>
+                <hr>
+                <p>Follower: <%= profile[username].followers %> &nbsp; &nbsp; Following: <%= profile[username].following
+                            %>
+                </p>
+
+                <% for (let post of profile[username].posts) { %>
+                    <!-- <p><%= post %></p> -->
+                    <img src="<%= post.image%>" alt="Post Image" width="400" height="500">
+                    <p>Likes: <%= post.likes %> &nbsp; &nbsp; &nbsp; &nbsp;Comment <%= post.comments %>
+                    </p>
+                    <% } %>
+
+                        <p>
+                            This page is designed to provide information about
+                            the user profile for <%= profile[username].name %>.
+                        </p>
+                        <% } %>
+                        <%- include("includes/footer.ejs") %>
+
+    </body>
+
+    </html>
