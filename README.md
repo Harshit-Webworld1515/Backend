@@ -25,9 +25,23 @@ Backend/
 │  │  ├─ package.json
 │  │  └─ package-lock.json
 │  │
+│  ├─ EJSDIR/
+│  │  ├─ Gameof_Score/
+│  │  ├─ views/
+│  │  │  ├─ includes/
+│  │  │  ├─ about.ejs
+│  │  │  ├─ home.ejs
+│  │  │  ├─ instagram.ejs
+│  │  │  ├─ instahome.ejs
+│  │  │  └─ rolldice.ejs
+│  │  ├─ data.json
+│  │  ├─ index.js
+│  │  ├─ package.json
+│  │  └─ package-lock.json
+│  │
 │  └─ nodejs-Basics/
-│     ├─ Script.js          # 👈 direct child
-│     ├─ Math.js            # 👈 direct child
+│     ├─ Script.js
+│     ├─ Math.js
 │     │
 │     ├─ Fruit/
 │     │  ├─ Banana.js
