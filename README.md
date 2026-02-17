@@ -21,6 +21,9 @@ This repo will **grow over time** as more backend concepts are added.
 Backend/
 ├─ NodeJs/
 │  │
+│  ├─ SQL/                    
+│  │  └─ mysql_queries.sql
+│  │
 │  ├─ ExpressJS/
 │  │  ├─ index.js
 │  │  ├─ package.json
@@ -41,7 +44,7 @@ Backend/
 │  │     ├─ package.json
 │  │     └─ package-lock.json
 │  │
-│  ├─ Rest_class/             
+│  ├─ Rest_class/
 │  │  ├─ public/
 │  │  │  └─ Style.css
 │  │  │
@@ -68,26 +71,13 @@ Backend/
 │  └─ nodejs-Basics/
 │     ├─ Script.js
 │     ├─ Math.js
-│     │
 │     ├─ Fruit/
-│     │  ├─ Banana.js
-│     │  ├─ Mango.js
-│     │  ├─ Orange.js
-│     │  └─ index.js
-│     │
 │     ├─ RequireVsImport/
-│     │  ├─ export.js
-│     │  ├─ import.js
-│     │  ├─ package.json
-│     │  └─ package-lock.json
-│     │
 │     └─ FigletDir/
-│        ├─ index.js
-│        ├─ package.json
-│        └─ package-lock.json
 │
 ├─ .gitignore
 └─ README.md
+
 
 ```
 
