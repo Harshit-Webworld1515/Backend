@@ -20,24 +20,40 @@ This repo will **grow over time** as more backend concepts are added.
 ```
 Backend/
 ├─ NodeJs/
+│  │
 │  ├─ ExpressJS/
 │  │  ├─ index.js
 │  │  ├─ package.json
 │  │  ├─ package-lock.json
 │  │  │
-│  │  ├─ EJSDIR/
-│  │  │  ├─ Gameof_Score/
-│  │  │  ├─ views/
-│  │  │  │  ├─ includes/
-│  │  │  │  ├─ about.ejs
-│  │  │  │  ├─ home.ejs
-│  │  │  │  ├─ instagram.ejs
-│  │  │  │  ├─ instahome.ejs
-│  │  │  │  └─ rolldice.ejs
-│  │  │  ├─ data.json
-│  │  │  ├─ index.js
-│  │  │  ├─ package.json
-│  │  │  └─ package-lock.json
+│  │  └─ EJSDIR/
+│  │     ├─ Gameof_Score/
+│  │     ├─ views/
+│  │     │  ├─ includes/
+│  │     │  ├─ about.ejs
+│  │     │  ├─ home.ejs
+│  │     │  ├─ instagram.ejs
+│  │     │  ├─ instahome.ejs
+│  │     │  └─ rolldice.ejs
+│  │     │
+│  │     ├─ data.json
+│  │     ├─ index.js
+│  │     ├─ package.json
+│  │     └─ package-lock.json
+│  │
+│  ├─ Rest_class/             
+│  │  ├─ public/
+│  │  │  └─ Style.css
+│  │  │
+│  │  ├─ views/
+│  │  │  ├─ index.ejs
+│  │  │  ├─ edit.ejs
+│  │  │  ├─ new.ejs
+│  │  │  └─ show.ejs
+│  │  │
+│  │  ├─ index.js
+│  │  ├─ package.json
+│  │  └─ package-lock.json
 │  │
 │  ├─ Miscellaneous/
 │  │  ├─ Backend_Form/
@@ -72,7 +88,6 @@ Backend/
 │
 ├─ .gitignore
 └─ README.md
-
 
 ```
 
