@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+</head>
+
+<body>
+    <h1>All Users</h1>
+    <table border="2px solid black">
+        <caption><strong>All Users in the Database</strong></caption>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user=> { %>
+                <tr>
+                    <td>
+                        <%= user['id'] %>
+                    </td>
+                    <td>
+                        <%= user['username'] %>
+                    </td>
+                    <td>
+                        <%= user['email'] %>
+                    </td>
+                    <td>
+                        <form action="http://localhost:3000/users/<%= user['id'] %>/edit" method="get">
+                            <button>edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="http://localhost:3000/users/<%= user['id'] %>" method="get">
+                            <button>delete</button>
+                        </form>
+                </tr>
+                <% }); %>
+        </tbody>
+        <tfoot>
+            <td>
+               <a href="/adds">Add New User</a>
+            </td>
+        
+        </tfoot>
+    </table>
+    <a href="http://localhost:3000/">Back to Home</a>
+</body>
+
+</html>
