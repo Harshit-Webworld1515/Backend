@@ -21,8 +21,23 @@ This repo will **grow over time** as more backend concepts are added.
 Backend/
 ├─ NodeJs/
 │  │
-│  ├─ SQL/                    
-│  │  └─ mysql_queries.sql
+│  ├─ SQL/
+│  │  ├─ mysql_queries.sql
+│  │  ├─ practice1.sql
+│  │  └─ practice2.sql
+│  │
+│  ├─ SQL_With_Node/
+│  │  ├─ views/
+│  │  │  ├─ add.ejs
+│  │  │  ├─ delete.ejs
+│  │  │  ├─ edit.ejs
+│  │  │  ├─ home.ejs
+│  │  │  └─ users.ejs
+│  │  │
+│  │  ├─ index.js
+│  │  ├─ schema.sql
+│  │  ├─ package.json
+│  │  └─ package-lock.json
 │  │
 │  ├─ ExpressJS/
 │  │  ├─ index.js
