@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-left: 20px;
+    padding: 0; 
+
+}
+
+.chat{
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.msg{
+    background-color: dodgerblue;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-whatsapp</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1>Mini-whatsapp</h1>
+    <form action="/chats/new" method="get">
+        <button>New Chat</button>
+    </form>
+    <div class="chat">
+        <% chats.forEach(chat=> { %>
+            <p>From: <strong>
+                    <%= chat.from %>
+                </strong></p>
+
+            <div class="msg">
+                <p>
+                    <%= chat.msg %>
+                </p>
+                <form action="/chats/<%= chat._id %>/edit" method="get"><button>Edit</button></form>
+            </div>
+            <p>Recieved by: <i>
+                    <%= chat.to %>
+                </i></p>
+            <p>Created at:
+                <i>
+                    <%= chat.created_at ? chat.created_at.toLocaleTimeString() : "N/A" %>
+                </i>
+            </p>
+
+            <p>
+                <%= chat.created_at ? chat.created_at.toDateString() : "" %>
+            </p>
+            <br><br>
+            <% if(chat.updated_at){ %>
+                <p>Last Updated at:
+                    <i>
+                        <%= chat.updated_at.toLocaleTimeString() %>
+                    </i>
+                </p>
+                <% } else { %>
+                    <p>Last Updated at: <i>Not Updated Yet</i></p>
+                <% } %>
+
+                <form action="/chats/<%= chat._id %>?_method=DELETE" method="post"><button>Delete</button></form>
+                        <hr>
+        <% }) %>
+                            
+    </div>
+</body>
+
+</html>
