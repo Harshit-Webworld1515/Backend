@@ -79,26 +79,41 @@ app.get('/chats/:id/edit', async (req, res) => {
 });
 app.put('/chats/:id/edit', async (req, res) => {
     try {
-        
-        const { msg, from, to} = req.body;
+
+        const { msg, from, to } = req.body;
         let updatedChat = await Chat.findByIdAndUpdate(req.params.id, {
             msg: msg,
             from: from,
             to: to,
             // created_at: new Date(),
             updated_at: new Date()
-        },{ new: true, runValidators: true });
+        }, { new: true, runValidators: true });
         res.redirect('/chats');
     } catch (err) {
         console.error(err);
         res.status(500).send('Error updating chat');
-    }       
+    }
 });
 // delete chat
+app.get('/chats/:id', async (req, res) => {
+    try {
+        const chat = await Chat.findById(req.params.id);
+        res.render('deletechat', { chat });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving chat');
+    }
+});
 app.delete('/chats/:id', async (req, res) => {
     try {
-        await Chat.findByIdAndDelete(req.params.id);
-        res.redirect('/chats');
+        const { from } = req.body;
+        const chat = await Chat.findById(req.params.id);
+        if (chat.from !== from) {
+            return res.status(403).send('Unauthorized to delete this chat<br><a href="/chats">Go Back</a>');
+        } else {
+            await Chat.findByIdAndDelete(req.params.id);
+            res.redirect('/chats');
+        }
     } catch (err) {
         console.error(err);
         res.status(500).send('Error deleting chat');

@@ -48,7 +48,7 @@
                     <p>Last Updated at: <i>Not Updated Yet</i></p>
                 <% } %>
 
-                <form action="/chats/<%= chat._id %>?_method=DELETE" method="post"><button>Delete</button></form>
+                <form action="/chats/<%= chat._id %>" method="get"><button>Delete</button></form>
                         <hr>
         <% }) %>
                             
