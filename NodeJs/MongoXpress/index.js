@@ -85,7 +85,7 @@ app.put('/chats/:id/edit', async (req, res) => {
             msg: msg,
             from: from,
             to: to,
-            created_at: new Date(),
+            // created_at: new Date(),
             updated_at: new Date()
         },{ new: true, runValidators: true });
         res.redirect('/chats');
