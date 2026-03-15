@@ -79,6 +79,29 @@ Backend/
 │  │  ├─ package.json
 │  │  └─ package-lock.json
 │  │
+│  ├─ Middlewares/
+│  │  ├─ app.js
+│  │  ├─ package.json
+│  │  └─ package-lock.json
+│  │
+│  ├─ MongoXpress/
+│  │  ├─ Models/
+│  │  │  └─ chat.js
+│  │  │
+│  │  ├─ Views/
+│  │  │  ├─ deletechat.ejs
+│  │  │  ├─ editsms.ejs
+│  │  │  ├─ index.ejs
+│  │  │  └─ newchat.ejs
+│  │  │
+│  │  ├─ public/
+│  │  │  └─ style.css
+│  │  │
+│  │  ├─ index.js
+│  │  ├─ init.js
+│  │  ├─ package.json
+│  │  └─ package-lock.json
+│  │
 │  ├─ Miscellaneous/
 │  │  ├─ Backend_Form/
 │  │  │  ├─ index.js
@@ -98,7 +121,6 @@ Backend/
 │
 ├─ .gitignore
 └─ README.md
-
 ```
 
 > Each folder inside `NodeJs/` may represent **a separate concept or mini-project**.
