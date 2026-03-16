@@ -88,7 +88,12 @@ class Dog extends Mammal {
     talk() {
         console.log(`${this.name} is a ${this.breed} dog.`);
     }
-}   
+}
+//Rule:
+//Child constructor me super() likhna zaruri hai.
+//super() parent constructor ko call karta hai.
+//IMPORTANT
+//super() se pehle this use nahi kar sakte
 const dog1 = new Dog("Tommy🐶", "Golden Retriever");
 dog1.talk();
 class Cat extends Mammal {
