@@ -25,6 +25,7 @@
                 </p>
                 <form action="/chats/<%= chat._id %>/edit" method="get"><button>Edit</button></form>
             </div>
+            <form action="/chats/<%= chat._id %>" method="get"><button>Show</button></form>
             <p>Recieved by: <i>
                     <%= chat.to %>
                 </i></p>
@@ -48,7 +49,7 @@
                     <p>Last Updated at: <i>Not Updated Yet</i></p>
                 <% } %>
 
-                <form action="/chats/<%= chat._id %>" method="get"><button>Delete</button></form>
+                <form action="/chats/<%= chat._id %>/delete" method="get"><button>Delete</button></form>
                         <hr>
         <% }) %>
                             

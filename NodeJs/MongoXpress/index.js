@@ -5,6 +5,7 @@ const ejs = require('ejs');
 const path = require('path');
 const Chat = require('./Models/chat');
 const methodOverride = require('method-override');
+const ExpressError = require('./ExpressError');
 
 
 app.use(methodOverride('_method'));
@@ -49,8 +50,22 @@ app.get('/chats', async (req, res) => {
 });
 // create new chat
 app.get('/chats/new', (req, res) => {
+    throw new ExpressError('This is a custom error message', 400);
     res.render('newchat');
+}); 
+app.get('/chats/:id', async (req, res,next) => {
+    try {
+        const chat = await Chat.findById(req.params.id);
+        if (!chat) {
+            next(new ExpressError('Chat not found yha', 404));
+        }
+        res.render('show', { chat });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving chat');
+    }
 });
+
 app.post('/chats/new', async (req, res) => {
     try {
         const { msg, from, to } = req.body;
@@ -68,15 +83,19 @@ app.post('/chats/new', async (req, res) => {
     }
 });
 // edit chat
-app.get('/chats/:id/edit', async (req, res) => {
+app.get('/chats/:id/edit', async (req, res, next) => {
     try {
         const chat = await Chat.findById(req.params.id);
+        if (!chat) {
+            return next(new ExpressError('Chat not found', 404));
+        }
         res.render('editsms', { chat });
     } catch (err) {
         console.error(err);
         res.status(500).send('Error retrieving chat');
     }
 });
+// update chat 
 app.put('/chats/:id/edit', async (req, res) => {
     try {
 
@@ -95,7 +114,7 @@ app.put('/chats/:id/edit', async (req, res) => {
     }
 });
 // delete chat
-app.get('/chats/:id', async (req, res) => {
+app.get('/chats/:id/delete', async (req, res) => {
     try {
         const chat = await Chat.findById(req.params.id);
         res.render('deletechat', { chat });
@@ -118,4 +137,12 @@ app.delete('/chats/:id', async (req, res) => {
         console.error(err);
         res.status(500).send('Error deleting chat');
     }
+});
+// error handling middleware for all routes
+app.use((err, req, res, next) => {
+    const { statusCode = 500,message } = err;
+    res.status(statusCode).send(err.message);
+});
+app.use((req, res, next) => {
+    next(new ExpressError('Page Not Found', 404));
 });

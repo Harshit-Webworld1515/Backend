@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show chat</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Show Chat</h1>
+    <p>From: <strong><%= chat.from %></strong></p>
+    <p>To: <i><%= chat.to %></i></p>
+    <p>Message: <%= chat.msg %></p>
+    <p>Created at: <i><%= chat.created_at ? chat.created_at.toLocaleTimeString() : "N/A" %></i></p>
+    <p><%= chat.created_at ? chat.created_at.toDateString() : "" %></p>
+    <% if(chat.updated_at){ %>
+        <p>Last Updated at: <i><%= chat.updated_at.toLocaleTimeString() %></i></p>
+    <% } else { %>
+        <p>Last Updated at: <i>Not Updated Yet</i></p>
+    <% } %>
+    <a href="/chats">Back to Chats</a>
+</body>
+</html>
