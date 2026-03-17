@@ -48,6 +48,10 @@ app.get("/api", checkToken, (req, res) => {
 app.get("/", (req, res) => {
     res.send("Hello, World! from the root directory");
 })
+app.get("/admin", (req, res) => {
+    throw new ExpressError("You are not an admin", 403);
+    res.send("This will not be executed because of the error");
+})
 app.get("/err", (req, res) => {
     abc=abc; // this will throw an error because abc is not defined
     res.send("This will not be executed because of the error");
@@ -58,8 +62,9 @@ app.use((err, req, res, next) => {
 });
 app.use((err, req, res, next) => {
     console.log("Error2: Something went wrong!" + err.message);
-    next(err); // Call the next error handler middleware in the stack
-    res.send(err.message);
+    // Call the next error handler middleware in the stack
+    let {statusCode=500, message} = err;
+    res.status(statusCode).send(message);
 });
 
 
