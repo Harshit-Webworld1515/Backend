@@ -44,13 +44,12 @@ app.get('/chats', async (req, res) => {
         console.log(chats);
         res.render('index', { chats });
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error retrieving chats');
+        next(err);
     }
 });
 // create new chat
 app.get('/chats/new', (req, res) => {
-    throw new ExpressError('This is a custom error message', 400);
+    // throw new ExpressError('This is a custom error message', 400);
     res.render('newchat');
 }); 
 app.get('/chats/:id', async (req, res,next) => {
@@ -62,11 +61,12 @@ app.get('/chats/:id', async (req, res,next) => {
         res.render('show', { chat });
     } catch (err) {
         console.error(err);
-        res.status(500).send('Error retrieving chat');
+        next(err);
+        // res.status(500).send('Error retrieving chat');
     }
 });
 
-app.post('/chats/new', async (req, res) => {
+app.post('/chats/new', async (req, res,next) => {
     try {
         const { msg, from, to } = req.body;
         const newChat = new Chat({
@@ -78,8 +78,7 @@ app.post('/chats/new', async (req, res) => {
         await newChat.save();
         res.redirect('/chats');
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error saving chat');
+        next(err);
     }
 });
 // edit chat
@@ -91,12 +90,13 @@ app.get('/chats/:id/edit', async (req, res, next) => {
         }
         res.render('editsms', { chat });
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error retrieving chat');
+        next(err);
+        // console.error(err);
+        // res.status(500).send('Error retrieving chat');
     }
 });
 // update chat 
-app.put('/chats/:id/edit', async (req, res) => {
+app.put('/chats/:id/edit', async (req, res,next) => {
     try {
 
         const { msg, from, to } = req.body;
@@ -109,21 +109,23 @@ app.put('/chats/:id/edit', async (req, res) => {
         }, { new: true, runValidators: true });
         res.redirect('/chats');
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error updating chat');
+        next(err);
+        // console.error(err);
+        // res.status(500).send('Error updating chat');
     }
 });
 // delete chat
-app.get('/chats/:id/delete', async (req, res) => {
+app.get('/chats/:id/delete', async (req, res,next) => {
     try {
         const chat = await Chat.findById(req.params.id);
         res.render('deletechat', { chat });
     } catch (err) {
-        console.error(err);
+        next(err);
+        // console.error(err);
         res.status(500).send('Error retrieving chat');
     }
 });
-app.delete('/chats/:id', async (req, res) => {
+app.delete('/chats/:id', async (req, res,next) => {
     try {
         const { from } = req.body;
         const chat = await Chat.findById(req.params.id);
@@ -134,7 +136,8 @@ app.delete('/chats/:id', async (req, res) => {
             res.redirect('/chats');
         }
     } catch (err) {
-        console.error(err);
+        next(err);
+        // console.error(err);
         res.status(500).send('Error deleting chat');
     }
 });
