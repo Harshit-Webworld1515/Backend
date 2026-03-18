@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 app.get('/chats', async (req, res) => {
     try {
         const chats = await Chat.find();
-        console.log(chats);
+        // console.log(chats);
         res.render('index', { chats });
     } catch (err) {
         next(err);
@@ -51,23 +51,23 @@ app.get('/chats', async (req, res) => {
 app.get('/chats/new', (req, res) => {
     // throw new ExpressError('This is a custom error message', 400);
     res.render('newchat');
-}); 
+});
 function wrapAsync(fn) {
     return function (req, res, next) {
-        fn(req, res, next).catch((err)=>{next(err)});
+        fn(req, res, next).catch((err) => { next(err) });
     };
 }
-app.get('/chats/:id', wrapAsync(async (req, res,next) => {
-        const chat = await Chat.findById(req.params.id);
-        if (!chat) {
-            next(new ExpressError('Chat not found yha', 404));
-        }
-        res.render('show', { chat });
-    } 
+app.get('/chats/:id', wrapAsync(async (req, res, next) => {
+    const chat = await Chat.findById(req.params.id);
+    if (!chat) {
+        next(new ExpressError('Chat not found yha', 404));
+    }
+    res.render('show', { chat });
+}
 ));
 
 
-app.post('/chats/new', async (req, res,next) => {
+app.post('/chats/new', async (req, res, next) => {
     try {
         const { msg, from, to } = req.body;
         const newChat = new Chat({
@@ -84,35 +84,35 @@ app.post('/chats/new', async (req, res,next) => {
 });
 // edit chat
 app.get('/chats/:id/edit', wrapAsync(async (req, res, next) => {
-        const chat = await Chat.findById(req.params.id);
-        if (!chat) {
-            return next(new ExpressError('Chat not found', 404));
-        }
-        res.render('editsms', { chat });
-    } 
-)); 
-// update chat 
-app.put('/chats/:id/edit', wrapAsync(async (req, res,next) => {
-        const { msg, from, to } = req.body;
-        let updatedChat = await Chat.findByIdAndUpdate(req.params.id, {
-            msg: msg,
-            from: from,
-            to: to,
-            // created_at: new Date(),
-            updated_at: new Date()
-        }, { new: true, runValidators: true });
-        res.redirect('/chats');
-        // console.error(err);
-        // res.status(500).send('Error updating chat');
+    const chat = await Chat.findById(req.params.id);
+    if (!chat) {
+        return next(new ExpressError('Chat not found', 404));
     }
+    res.render('editsms', { chat });
+}
+));
+// update chat 
+app.put('/chats/:id/edit', wrapAsync(async (req, res, next) => {
+    const { msg, from, to } = req.body;
+    let updatedChat = await Chat.findByIdAndUpdate(req.params.id, {
+        msg: msg,
+        from: from,
+        to: to,
+        // created_at: new Date(),
+        updated_at: new Date()
+    }, { new: true, runValidators: true });
+    res.redirect('/chats');
+    // console.error(err);
+    // res.status(500).send('Error updating chat');
+}
 ));
 // delete chat
-app.get('/chats/:id/delete', wrapAsync(async (req, res,next) => {
-        const chat = await Chat.findById(req.params.id);
-        res.render('deletechat', { chat });
-    } 
+app.get('/chats/:id/delete', wrapAsync(async (req, res, next) => {
+    const chat = await Chat.findById(req.params.id);
+    res.render('deletechat', { chat });
+}
 ));
-app.delete('/chats/:id', wrapAsync(async (req, res,next) => {
+app.delete('/chats/:id', wrapAsync(async (req, res, next) => {
     const { from } = req.body;
     const chat = await Chat.findById(req.params.id);
     if (chat.from !== from) {
@@ -123,12 +123,27 @@ app.delete('/chats/:id', wrapAsync(async (req, res,next) => {
     }
 }
 ));
-        
+const handleValidationErr = (err) => {
+    console.log("This was a Validation error plz folllow Rules");
+    console.dir(err.message);
+    return err;
+}
+
+//specific Err handling Middleware used to print name of err       
+app.use((err, req, res, next) => {
+    console.log(err.name);
+    if (err.name === "ValidationError") {
+        err = handleValidationErr(err);
+    }
+    next(err);
+})
+
+
 // error handling middleware for all routes
 app.use((err, req, res, next) => {
-    const { statusCode = 500,message } = err;
+    const { statusCode = 500, message } = err;
     res.status(statusCode).send(err.message);
 });
 app.use((req, res, next) => {
-    next(new ExpressError('Page Not Found', 404));
+    return next(new ExpressError('Page Not Found', 404));
 });
