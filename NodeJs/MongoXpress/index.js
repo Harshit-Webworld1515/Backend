@@ -52,19 +52,20 @@ app.get('/chats/new', (req, res) => {
     // throw new ExpressError('This is a custom error message', 400);
     res.render('newchat');
 }); 
-app.get('/chats/:id', async (req, res,next) => {
-    try {
+function wrapAsync(fn) {
+    return function (req, res, next) {
+        fn(req, res, next).catch((err)=>{next(err)});
+    };
+}
+app.get('/chats/:id', wrapAsync(async (req, res,next) => {
         const chat = await Chat.findById(req.params.id);
         if (!chat) {
             next(new ExpressError('Chat not found yha', 404));
         }
         res.render('show', { chat });
-    } catch (err) {
-        console.error(err);
-        next(err);
-        // res.status(500).send('Error retrieving chat');
-    }
-});
+    } 
+));
+
 
 app.post('/chats/new', async (req, res,next) => {
     try {
@@ -82,23 +83,16 @@ app.post('/chats/new', async (req, res,next) => {
     }
 });
 // edit chat
-app.get('/chats/:id/edit', async (req, res, next) => {
-    try {
+app.get('/chats/:id/edit', wrapAsync(async (req, res, next) => {
         const chat = await Chat.findById(req.params.id);
         if (!chat) {
             return next(new ExpressError('Chat not found', 404));
         }
         res.render('editsms', { chat });
-    } catch (err) {
-        next(err);
-        // console.error(err);
-        // res.status(500).send('Error retrieving chat');
-    }
-});
+    } 
+)); 
 // update chat 
-app.put('/chats/:id/edit', async (req, res,next) => {
-    try {
-
+app.put('/chats/:id/edit', wrapAsync(async (req, res,next) => {
         const { msg, from, to } = req.body;
         let updatedChat = await Chat.findByIdAndUpdate(req.params.id, {
             msg: msg,
@@ -108,39 +102,28 @@ app.put('/chats/:id/edit', async (req, res,next) => {
             updated_at: new Date()
         }, { new: true, runValidators: true });
         res.redirect('/chats');
-    } catch (err) {
-        next(err);
         // console.error(err);
         // res.status(500).send('Error updating chat');
     }
-});
+));
 // delete chat
-app.get('/chats/:id/delete', async (req, res,next) => {
-    try {
+app.get('/chats/:id/delete', wrapAsync(async (req, res,next) => {
         const chat = await Chat.findById(req.params.id);
         res.render('deletechat', { chat });
-    } catch (err) {
-        next(err);
-        // console.error(err);
-        res.status(500).send('Error retrieving chat');
+    } 
+));
+app.delete('/chats/:id', wrapAsync(async (req, res,next) => {
+    const { from } = req.body;
+    const chat = await Chat.findById(req.params.id);
+    if (chat.from !== from) {
+        return next(new ExpressError('Only the sender can delete this chat', 403));
+    } else {
+        await Chat.findByIdAndDelete(req.params.id);
+        res.redirect('/chats');
     }
-});
-app.delete('/chats/:id', async (req, res,next) => {
-    try {
-        const { from } = req.body;
-        const chat = await Chat.findById(req.params.id);
-        if (chat.from !== from) {
-            return res.status(403).send('Unauthorized to delete this chat<br><a href="/chats">Go Back</a>');
-        } else {
-            await Chat.findByIdAndDelete(req.params.id);
-            res.redirect('/chats');
-        }
-    } catch (err) {
-        next(err);
-        // console.error(err);
-        res.status(500).send('Error deleting chat');
-    }
-});
+}
+));
+        
 // error handling middleware for all routes
 app.use((err, req, res, next) => {
     const { statusCode = 500,message } = err;
