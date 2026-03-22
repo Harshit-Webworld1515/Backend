@@ -1,0 +1,17 @@
+{
+  "name": "mongorelation",
+  "version": "1.0.0",
+  "description": "This repo build to Learn relationship b/w all models",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Harshit Tiwari",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.3.1"
+  }
+}
