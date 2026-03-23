@@ -56,6 +56,12 @@ const addCustomer = async () => {
 
     console.log("Customer saved:", result);
 };
+//----------------- SHOW COLLECTION---------
+const findUser=async()=>{
+    const all=await Customer.find().populate("orders");
+    console.log("all Users: ",all[1]);
+}
 
 // ---------------- RUN ----------------
-    addCustomer();
+    // addCustomer();
+    findUser();
